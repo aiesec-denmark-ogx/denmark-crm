@@ -115,6 +115,7 @@ export function EpForm({ initial, myBranch }: { initial?: Ep; myBranch: Branch }
   const router = useRouter();
   const isMc = myBranch === 'MC Denmark';
   const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const [form, setForm] = useState({
@@ -152,36 +153,48 @@ export function EpForm({ initial, myBranch }: { initial?: Ep; myBranch: Branch }
     setSaving(true);
     setError(null);
 
-    const supabase = createClient();
-    const payload = {
-      ...form,
-      desired_product: form.desired_product || null,
-      background: form.background || null,
-      citizenship: form.citizenship || null,
-      referral: form.referral || null,
-      desired_region: form.desired_region || null,
-      earliest_start_date: form.earliest_start_date || null,
-      next_followup_date: form.next_followup_date
-        ? new Date(form.next_followup_date).toISOString()
-        : null,
-      personal_emails: form.personal_emails.filter(Boolean),
-      university: form.university.filter(Boolean),
-      countries_desired: form.countries_desired.filter(Boolean),
-    };
+    try {
+      const supabase = createClient();
+      const payload = {
+        ...form,
+        desired_product: form.desired_product || null,
+        background: form.background || null,
+        citizenship: form.citizenship || null,
+        referral: form.referral || null,
+        desired_region: form.desired_region || null,
+        earliest_start_date: form.earliest_start_date || null,
+        next_followup_date: form.next_followup_date
+          ? new Date(form.next_followup_date).toISOString()
+          : null,
+        personal_emails: form.personal_emails.filter(Boolean),
+        university: form.university.filter(Boolean),
+        countries_desired: form.countries_desired.filter(Boolean),
+      };
 
-    const result = initial
-      ? await supabase.from('eps').update(payload).eq('id', initial.id)
-      : await supabase.from('eps').insert(payload).select('id').single();
+      const result = initial
+        ? await supabase.from('eps').update(payload).eq('id', initial.id).select('id').single()
+        : await supabase.from('eps').insert(payload).select('id').single();
 
-    if (result.error) {
-      setError(result.error.message);
+      if (result.error) {
+        setError(result.error.message);
+        return;
+      }
+
+      setSaved(true);
+      router.refresh();
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      if (initial) {
+        router.push('/dashboard');
+      } else {
+        const id = (result.data as { id: string }).id;
+        router.replace(`/eps/${id}`);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong while saving.');
+    } finally {
       setSaving(false);
-      return;
     }
-
-    const id = initial?.id ?? (result.data as { id: string }).id;
-    router.replace(`/eps/${id}`);
-    router.refresh();
   }
 
   return (
@@ -448,10 +461,10 @@ export function EpForm({ initial, myBranch }: { initial?: Ep; myBranch: Branch }
       <div className="flex gap-3">
         <button
           type="submit"
-          disabled={saving}
+          disabled={saving || saved}
           className="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50 dark:bg-neutral-100 dark:text-neutral-900"
         >
-          {saving ? 'Saving…' : initial ? 'Save changes' : 'Create EP'}
+          {saved ? 'Saved ✓' : saving ? 'Saving…' : initial ? 'Save changes' : 'Create EP'}
         </button>
         <button
           type="button"

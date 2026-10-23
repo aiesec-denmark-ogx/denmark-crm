@@ -1,12 +1,14 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import type { Ep } from '@/lib/types';
 import { ALL_STATUSES, type Status } from '@/lib/status';
 import { StatusBadge } from '@/components/StatusBadge';
 
 export function DashboardTable({ eps }: { eps: Ep[] }) {
+  const router = useRouter();
   const [statusFilter, setStatusFilter] = useState<Status | 'all'>('all');
   const [query, setQuery] = useState('');
 
@@ -65,10 +67,15 @@ export function DashboardTable({ eps }: { eps: Ep[] }) {
             {filtered.map((ep) => (
               <tr
                 key={ep.id}
+                onClick={() => router.push(`/eps/${ep.id}`)}
                 className="cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900"
               >
                 <td className="px-4 py-3">
-                  <Link href={`/eps/${ep.id}`} className="font-medium hover:underline">
+                  <Link
+                    href={`/eps/${ep.id}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="font-medium hover:underline"
+                  >
                     {ep.name}
                   </Link>
                   <div className="text-xs text-neutral-500 dark:text-neutral-400">

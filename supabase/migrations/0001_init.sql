@@ -190,10 +190,15 @@ create policy "ep_status_history_select_branch_scoped" on public.ep_status_histo
     )
   );
 
--- record the initial status on insert, and every subsequent change on update
+-- record the initial status on insert, and every subsequent change on update.
+-- security definer: this is a system-maintained audit trail, not something
+-- users insert into directly, so it must bypass the (intentionally absent)
+-- insert policy on ep_status_history rather than need one.
 create or replace function public.record_status_change()
 returns trigger
 language plpgsql
+security definer
+set search_path = public
 as $$
 begin
   if (tg_op = 'INSERT') then

@@ -29,20 +29,17 @@ export default async function EpDetailPage({ params }: { params: Promise<{ id: s
   ];
 
   return (
-    <>
-      <div className="px-4 pt-6">
-        <Link
-          href="/dashboard"
-          className="inline-flex items-center gap-1.5 rounded-full bg-neutral-900 px-4 py-1.5 text-sm font-medium text-white hover:bg-neutral-700 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-          Back
-        </Link>
-      </div>
+    <main className="mx-auto w-full max-w-3xl px-4 py-8">
+      <Link
+        href="/dashboard"
+        className="-ml-24 mb-4 inline-flex items-center gap-1.5 rounded-full bg-neutral-900 px-4 py-1.5 text-sm font-medium text-white hover:bg-neutral-700 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+        Back
+      </Link>
 
-      <main className="mx-auto w-full max-w-3xl px-4 py-8">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
           {ep.name}
@@ -76,7 +73,6 @@ export default async function EpDetailPage({ params }: { params: Promise<{ id: s
       <hr className="my-8 border-neutral-200 dark:border-neutral-800" />
 
       <CommentSection epId={ep.id} myId={user.id} />
-      </main>
-    </>
+    </main>
   );
 }

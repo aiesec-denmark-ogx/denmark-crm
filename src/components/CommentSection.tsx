@@ -10,7 +10,6 @@ export function CommentSection({ epId, myId }: { epId: string; myId: string }) {
   const [comments, setComments] = useState<CommentWithAuthor[]>([]);
   const [mentionable, setMentionable] = useState<Profile[]>([]);
   const [body, setBody] = useState('');
-  const [mentionedIds, setMentionedIds] = useState<string[]>([]);
   const [mentionQuery, setMentionQuery] = useState<string | null>(null);
   const [posting, setPosting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -62,7 +61,6 @@ export function CommentSection({ epId, myId }: { epId: string; myId: string }) {
     const replaced = upToCursor.replace(/@([^\s@]*)$/, `@${profile.email} `);
     const nextBody = replaced + afterCursor;
     setBody(nextBody);
-    setMentionedIds((ids) => (ids.includes(profile.id) ? ids : [...ids, profile.id]));
     setMentionQuery(null);
     requestAnimationFrame(() => textarea.focus());
   }
@@ -75,7 +73,12 @@ export function CommentSection({ epId, myId }: { epId: string; myId: string }) {
 
     try {
       const supabase = createClient();
-      const usedMentions = mentionedIds.filter((id) => body.includes(`@${mentionable.find((p) => p.id === id)?.email}`));
+      // Scan the final text for "@<email>" against everyone mentionable, rather
+      // than relying only on dropdown-click state — this also catches an email
+      // typed out by hand instead of picked from the suggestion list.
+      const usedMentions = mentionable
+        .filter((p) => body.includes(`@${p.email}`))
+        .map((p) => p.id);
       const { error: insertError } = await supabase.from('comments').insert({
         ep_id: epId,
         author_id: myId,
@@ -87,7 +90,6 @@ export function CommentSection({ epId, myId }: { epId: string; myId: string }) {
         return;
       }
       setBody('');
-      setMentionedIds([]);
       await load();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not post comment.');

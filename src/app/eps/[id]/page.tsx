@@ -29,6 +29,13 @@ export default async function EpDetailPage({ params }: { params: Promise<{ id: s
 
   return (
     <main className="mx-auto w-full max-w-3xl px-4 py-8">
+      <Link
+        href="/dashboard"
+        className="mb-4 inline-flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+      >
+        ← Back to dashboard
+      </Link>
+
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
           {ep.name}

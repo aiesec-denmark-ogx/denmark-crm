@@ -94,7 +94,8 @@ export function DocumentsSection({ epId }: { epId: string }) {
           onClick={() => fileInputRef.current?.click()}
           disabled={uploading}
           aria-label="Add file"
-          className="flex h-7 w-7 items-center justify-center rounded-full border border-neutral-300 text-lg leading-none text-neutral-600 hover:bg-neutral-100 disabled:opacity-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
+          style={{ width: 28, height: 28 }}
+          className="flex shrink-0 items-center justify-center rounded-md border border-neutral-300 text-base leading-none text-neutral-600 hover:bg-neutral-100 disabled:opacity-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
         >
           +
         </button>
@@ -117,16 +118,19 @@ export function DocumentsSection({ epId }: { epId: string }) {
           {documents.map((doc) => (
             <div key={doc.id} className="flex items-center gap-3 px-3 py-2">
               <svg
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                className="h-6 w-6 shrink-0 text-red-500"
+                style={{ flexShrink: 0 }}
+                className="text-red-500"
               >
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                 <path d="M14 2v6h6" />
               </svg>
-              <button type="button" onClick={() => handleOpen(doc)} className="flex-1 truncate text-left">
+              <button type="button" onClick={() => handleOpen(doc)} className="min-w-0 flex-1 truncate text-left">
                 <div className="truncate text-sm font-medium text-neutral-900 hover:underline dark:text-neutral-100">
                   {doc.file_name}
                 </div>
@@ -136,7 +140,8 @@ export function DocumentsSection({ epId }: { epId: string }) {
                 type="button"
                 onClick={() => handleDelete(doc)}
                 aria-label="Delete file"
-                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-neutral-400 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950"
+                style={{ width: 22, height: 22 }}
+                className="flex shrink-0 items-center justify-center rounded-full text-neutral-400 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950"
               >
                 ✕
               </button>

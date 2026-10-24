@@ -3,6 +3,7 @@
 import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { Logo, LogoMark } from '@/components/Logo';
 
 export default function LoginPage() {
   return (
@@ -57,9 +58,12 @@ function LoginForm() {
 
         <div className="relative flex flex-1 items-center">
           <div>
-            <span className="font-display bg-gradient-to-r from-sky-300 via-sky-100 to-brand-orange bg-clip-text text-6xl font-bold tracking-tight text-transparent">
-              Synapse
-            </span>
+            <div className="flex items-center gap-4">
+              <LogoMark size={64} />
+              <span className="font-display bg-gradient-to-r from-sky-300 via-sky-100 to-brand-orange bg-clip-text text-6xl font-bold tracking-tight text-transparent">
+                Synapse
+              </span>
+            </div>
             <div className="mt-6 h-1 w-12 rounded-full bg-brand-orange" />
           </div>
         </div>
@@ -76,8 +80,8 @@ function LoginForm() {
             <div className="text-xs font-semibold tracking-[0.2em] text-brand-blue uppercase">
               AIESEC Denmark
             </div>
-            <div className="font-display mt-1 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-              Synapse
+            <div className="mt-1">
+              <Logo size={32} textClassName="font-display text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100" />
             </div>
           </div>
 

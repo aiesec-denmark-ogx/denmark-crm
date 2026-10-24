@@ -59,7 +59,9 @@ function LoginForm() {
         <div className="relative">
           <div className="flex items-center gap-3">
             <LogoMark size={40} />
-            <span className="font-display text-5xl font-bold tracking-tight">Synapse</span>
+            <span className="font-display bg-gradient-to-r from-sky-300 via-sky-100 to-brand-orange bg-clip-text text-5xl font-bold tracking-tight text-transparent">
+              Synapse
+            </span>
           </div>
           <p className="font-accent mt-4 max-w-xs text-lg leading-relaxed text-white/80 italic">
             The home base for every Global Volunteer and Global Talent exchange — from first

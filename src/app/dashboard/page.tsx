@@ -3,6 +3,7 @@ import { requireUser } from '@/lib/auth';
 import { createClient } from '@/lib/supabase/server';
 import { SignOutButton } from '@/components/SignOutButton';
 import { DashboardTable } from '@/components/DashboardTable';
+import { NotificationBell } from '@/components/NotificationBell';
 import type { Ep } from '@/lib/types';
 
 export default async function DashboardPage() {
@@ -34,6 +35,7 @@ export default async function DashboardPage() {
           >
             + New EP
           </Link>
+          <NotificationBell myId={user.id} />
           <SignOutButton />
         </div>
       </header>

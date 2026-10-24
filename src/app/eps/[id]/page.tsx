@@ -3,12 +3,13 @@ import { notFound } from 'next/navigation';
 import { requireUser } from '@/lib/auth';
 import { createClient } from '@/lib/supabase/server';
 import { EpForm } from '@/components/EpForm';
+import { CommentSection } from '@/components/CommentSection';
 import { formatDuration } from '@/lib/status';
 import type { Ep, EpProcessTimes } from '@/lib/types';
 
 export default async function EpDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const { profile } = await requireUser();
+  const { user, profile } = await requireUser();
   const supabase = await createClient();
 
   const { data: ep } = await supabase.from('eps').select('*').eq('id', id).single<Ep>();
@@ -53,6 +54,10 @@ export default async function EpDetailPage({ params }: { params: Promise<{ id: s
       </section>
 
       <EpForm initial={ep} myBranch={profile.branch} />
+
+      <hr className="my-8 border-neutral-200 dark:border-neutral-800" />
+
+      <CommentSection epId={ep.id} myId={user.id} />
     </main>
   );
 }

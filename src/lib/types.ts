@@ -52,3 +52,30 @@ export type Profile = {
   branch: Branch;
   created_at: string;
 };
+
+export type Comment = {
+  id: string;
+  ep_id: string;
+  author_id: string;
+  body: string;
+  mentioned_user_ids: string[];
+  created_at: string;
+};
+
+export type Notification = {
+  id: string;
+  recipient_id: string;
+  comment_id: string;
+  ep_id: string;
+  read: boolean;
+  created_at: string;
+};
+
+export type EpDocument = {
+  id: string;
+  ep_id: string;
+  file_name: string;
+  storage_path: string;
+  uploaded_by: string | null;
+  created_at: string;
+};

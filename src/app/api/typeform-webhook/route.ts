@@ -59,12 +59,33 @@ const EUROPE_NON_EU_COUNTRIES = new Set([
   'Vatican City', 'Turkey',
 ]);
 
+// Typeform's country dropdown answers come back as "🇩🇰 Denmark" — the flag
+// is part of the choice label, not just UI decoration.
+function stripFlag(label: string | null): string | null {
+  if (!label) return label;
+  return label.replace(/^\p{Regional_Indicator}{2}\s*/u, '').trim();
+}
+
 function mapCitizenship(country: string | null): Citizenship | null {
   if (!country) return null;
   if (country === 'Denmark') return 'Danish';
   if (EU_COUNTRIES.has(country)) return 'Europe - EU';
   if (EUROPE_NON_EU_COUNTRIES.has(country)) return 'Europe - non-EU';
   return 'Others';
+}
+
+// Typeform includes "(optional)" as literal title text for optional
+// questions, not just a UI badge — strip it so title matching is reliable.
+function normalizeTitle(title: string): string {
+  return title.replace(/\s*\(optional\)\s*$/i, '').trim();
+}
+
+// Typeform fires a webhook for the Go zero-date sentinel ("0001-01-01...")
+// on incomplete/partial submissions. Treat those as not-a-real-submission.
+function isCompleteSubmission(submittedAt: string | undefined): boolean {
+  if (!submittedAt) return false;
+  const year = new Date(submittedAt).getUTCFullYear();
+  return !Number.isNaN(year) && year > 1970;
 }
 
 function detectEntity(cityAnswer: string | null): Branch {
@@ -155,6 +176,11 @@ export async function POST(request: Request) {
   }
 
   const payload = JSON.parse(rawBody) as TypeformPayload;
+
+  if (!isCompleteSubmission(payload.form_response.submitted_at)) {
+    return NextResponse.json({ ok: true, skipped: 'incomplete submission' });
+  }
+
   const answers = payload.form_response.answers ?? [];
   const fieldTitleById = new Map(
     (payload.form_response.definition?.fields ?? []).map((f) => [f.id, f.title])
@@ -173,8 +199,9 @@ export async function POST(request: Request) {
   };
 
   for (const answer of answers) {
-    const title = fieldTitleById.get(answer.field.id);
-    if (!title) continue;
+    const rawTitle = fieldTitleById.get(answer.field.id);
+    if (!rawTitle) continue;
+    const title = normalizeTitle(rawTitle);
     const value = answer.type === 'file_url' ? null : answerValue(answer);
 
     switch (title) {
@@ -191,10 +218,12 @@ export async function POST(request: Request) {
         if (typeof value === 'string') personalEmails.push(value);
         break;
       case 'What is country you currently reside in?':
-        record.country_of_residence = value;
+        record.country_of_residence = typeof value === 'string' ? stripFlag(value) : value;
         break;
       case 'What is your nationality?':
-        record.citizenship = mapCitizenship(typeof value === 'string' ? value : null);
+        record.citizenship = mapCitizenship(
+          typeof value === 'string' ? stripFlag(value) : null
+        );
         break;
       case 'What is your date of birth?':
         record.date_of_birth = value;

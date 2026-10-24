@@ -58,7 +58,7 @@ function LoginForm() {
 
         <div className="relative">
           <div className="flex items-center gap-3">
-            <LogoMark size={40} />
+            <LogoMark size={40} tone="dark" />
             <span className="font-display bg-gradient-to-r from-sky-300 via-sky-100 to-brand-orange bg-clip-text text-5xl font-bold tracking-tight text-transparent">
               Synapse
             </span>

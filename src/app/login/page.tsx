@@ -70,7 +70,9 @@ function LoginForm() {
           <div className="mt-8 h-1 w-12 rounded-full bg-brand-orange" />
         </div>
 
-        <div className="relative text-xs text-white/50">OGX &middot; Odense &middot; Kopenhag &middot; Aarhus</div>
+        <div className="relative text-sm font-medium tracking-wide text-white/70">
+          Odense &middot; Kopenhag &middot; Aarhus
+        </div>
       </div>
 
       {/* Sign-in panel */}

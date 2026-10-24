@@ -36,17 +36,33 @@ export function LogoMark({ size = 28, className }: { size?: number; className?: 
 
 export function Logo({
   size = 28,
+  pulse = false,
   textClassName,
   markClassName,
 }: {
   size?: number;
+  pulse?: boolean;
   textClassName?: string;
   markClassName?: string;
 }) {
   return (
-    <span className="inline-flex items-center gap-2.5">
-      <LogoMark size={size} className={markClassName} />
-      <span className={textClassName ?? 'font-display text-xl font-bold tracking-tight'}>
+    <span className="relative inline-flex items-center gap-2.5">
+      {pulse && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src="/brand/ekg-pulse.png"
+          alt=""
+          className="pointer-events-none absolute top-1/2 -left-[15%] h-[40%] w-[160%] -translate-y-1/2 object-cover opacity-90"
+        />
+      )}
+      <LogoMark size={size} className={markClassName ? `relative ${markClassName}` : 'relative'} />
+      <span
+        className={
+          textClassName
+            ? `relative ${textClassName}`
+            : 'font-display relative text-xl font-bold tracking-tight'
+        }
+      >
         Synapse
       </span>
     </span>

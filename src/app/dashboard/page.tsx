@@ -20,7 +20,11 @@ export default async function DashboardPage() {
     <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 px-4 py-8">
       <header className="flex items-center justify-between">
         <div>
-          <Logo size={26} textClassName="font-display text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100" />
+          <Logo
+            size={26}
+            pulse
+            textClassName="font-display text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100"
+          />
           <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
             {profile.branch === 'MC Denmark' ? 'Viewing all branches' : `Viewing ${profile.branch}`}
             {' · '}

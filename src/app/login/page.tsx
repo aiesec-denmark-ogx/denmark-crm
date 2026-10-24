@@ -52,7 +52,7 @@ function LoginForm() {
           style={{ background: 'var(--brand-orange)' }}
         />
 
-        <div className="relative text-sm font-semibold tracking-[0.2em] text-white/70 uppercase">
+        <div className="font-sans relative text-sm font-bold tracking-[0.2em] text-white uppercase">
           AIESEC Denmark
         </div>
 

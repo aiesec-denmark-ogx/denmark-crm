@@ -31,9 +31,12 @@ export default async function EpDetailPage({ params }: { params: Promise<{ id: s
     <main className="mx-auto w-full max-w-3xl px-4 py-8">
       <Link
         href="/dashboard"
-        className="mb-4 inline-flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+        className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-neutral-900 px-4 py-1.5 text-sm font-medium text-white hover:bg-neutral-700 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300"
       >
-        ← Back to dashboard
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+        Back
       </Link>
 
       <div className="mb-6 flex items-center justify-between">

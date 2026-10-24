@@ -63,11 +63,7 @@ function LoginForm() {
               Synapse
             </span>
           </div>
-          <p className="font-accent mt-4 max-w-xs text-lg leading-relaxed text-white/80 italic">
-            The home base for every Global Volunteer and Global Talent exchange — from first
-            sign-up to Realised.
-          </p>
-          <div className="mt-8 h-1 w-12 rounded-full bg-brand-orange" />
+          <div className="mt-6 h-1 w-12 rounded-full bg-brand-orange" />
         </div>
 
         <div className="relative text-sm font-medium tracking-wide text-white/70">

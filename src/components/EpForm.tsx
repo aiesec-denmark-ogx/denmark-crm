@@ -142,6 +142,10 @@ export function EpForm({ initial, myBranch }: { initial?: Ep; myBranch: Branch }
     next_followup_date: initial?.next_followup_date?.slice(0, 16) ?? '',
     next_touchpoint_description: initial?.next_touchpoint_description ?? '',
     gdpr_accepted: initial?.gdpr_accepted ?? false,
+    date_of_birth: initial?.date_of_birth ?? '',
+    linkedin_url: initial?.linkedin_url ?? '',
+    country_of_residence: initial?.country_of_residence ?? '',
+    semester: initial?.semester ?? '',
   });
 
   function set<K extends keyof typeof form>(key: K, value: (typeof form)[K]) {
@@ -163,6 +167,10 @@ export function EpForm({ initial, myBranch }: { initial?: Ep; myBranch: Branch }
         referral: form.referral || null,
         desired_region: form.desired_region || null,
         earliest_start_date: form.earliest_start_date || null,
+        date_of_birth: form.date_of_birth || null,
+        linkedin_url: form.linkedin_url || null,
+        country_of_residence: form.country_of_residence || null,
+        semester: form.semester || null,
         next_followup_date: form.next_followup_date
           ? new Date(form.next_followup_date).toISOString()
           : null,
@@ -355,6 +363,42 @@ export function EpForm({ initial, myBranch }: { initial?: Ep; myBranch: Branch }
           onChange={(e) => set('university_expa', e.target.value)}
         />
       </div>
+
+      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <label className={labelClass}>Date of birth</label>
+          <input
+            type="date"
+            className={inputClass}
+            value={form.date_of_birth}
+            onChange={(e) => set('date_of_birth', e.target.value)}
+          />
+        </div>
+        <div>
+          <label className={labelClass}>Country of residence</label>
+          <input
+            className={inputClass}
+            value={form.country_of_residence}
+            onChange={(e) => set('country_of_residence', e.target.value)}
+          />
+        </div>
+        <div>
+          <label className={labelClass}>Semester</label>
+          <input
+            className={inputClass}
+            value={form.semester}
+            onChange={(e) => set('semester', e.target.value)}
+          />
+        </div>
+        <div>
+          <label className={labelClass}>LinkedIn / portfolio</label>
+          <input
+            className={inputClass}
+            value={form.linkedin_url}
+            onChange={(e) => set('linkedin_url', e.target.value)}
+          />
+        </div>
+      </section>
 
       <CheckboxGroup
         label="Languages spoken"

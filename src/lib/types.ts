@@ -32,6 +32,11 @@ export type Ep = {
 
   gdpr_accepted: boolean;
 
+  date_of_birth: string | null;
+  linkedin_url: string | null;
+  country_of_residence: string | null;
+  semester: string | null;
+
   date_registered: string;
   created_by: string | null;
   created_at: string;

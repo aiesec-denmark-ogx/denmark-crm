@@ -3,6 +3,7 @@
 import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { Logo, LogoMark } from '@/components/Logo';
 
 export default function LoginPage() {
   return (
@@ -56,8 +57,11 @@ function LoginForm() {
         </div>
 
         <div className="relative">
-          <div className="text-5xl font-semibold tracking-tight">Synapse</div>
-          <p className="mt-4 max-w-xs text-base leading-relaxed text-white/80">
+          <div className="flex items-center gap-3">
+            <LogoMark size={40} />
+            <span className="font-display text-5xl font-bold tracking-tight">Synapse</span>
+          </div>
+          <p className="font-accent mt-4 max-w-xs text-lg leading-relaxed text-white/80 italic">
             The home base for every Global Volunteer and Global Talent exchange — from first
             sign-up to Realised.
           </p>
@@ -74,12 +78,12 @@ function LoginForm() {
             <div className="text-xs font-semibold tracking-[0.2em] text-brand-blue uppercase">
               AIESEC Denmark
             </div>
-            <div className="mt-1 text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-              Synapse
+            <div className="mt-1">
+              <Logo size={30} textClassName="font-display text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100" />
             </div>
           </div>
 
-          <h1 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+          <h1 className="font-display text-2xl font-bold text-neutral-900 dark:text-neutral-100">
             Welcome back
           </h1>
           <p className="mt-1.5 text-sm text-neutral-500 dark:text-neutral-400">

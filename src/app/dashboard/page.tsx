@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { SignOutButton } from '@/components/SignOutButton';
 import { DashboardTable } from '@/components/DashboardTable';
 import { NotificationBell } from '@/components/NotificationBell';
+import { Logo } from '@/components/Logo';
 import type { Ep } from '@/lib/types';
 
 export default async function DashboardPage() {
@@ -19,10 +20,8 @@ export default async function DashboardPage() {
     <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 px-4 py-8">
       <header className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
-            Synapse
-          </h1>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+          <Logo size={26} textClassName="font-display text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100" />
+          <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
             {profile.branch === 'MC Denmark' ? 'Viewing all branches' : `Viewing ${profile.branch}`}
             {' · '}
             {user.email}

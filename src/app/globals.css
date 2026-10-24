@@ -16,7 +16,9 @@
   --color-brand-blue: var(--brand-blue);
   --color-brand-blue-dark: var(--brand-blue-dark);
   --color-brand-orange: var(--brand-orange);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-exo);
+  --font-display: var(--font-overlock);
+  --font-accent: var(--font-brawler);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -30,5 +32,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-exo), Arial, Helvetica, sans-serif;
 }

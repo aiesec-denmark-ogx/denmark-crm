@@ -76,6 +76,7 @@ export type EpDocument = {
   ep_id: string;
   file_name: string;
   storage_path: string;
+  size_bytes: number;
   uploaded_by: string | null;
   created_at: string;
 };

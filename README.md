@@ -1,4 +1,4 @@
-# AIESEC Denmark — OGX CRM
+# Synapse — AIESEC Denmark OGX CRM
 
 A small internal CRM for tracking OGX (Global Volunteer / Global Talent) Exchange
 Participants, replacing the Podio "EP CRM" app. Built with Next.js + Supabase,
@@ -89,19 +89,19 @@ npm run dev
    to your Vercel URL (or your custom domain, see below) and add it to
    **Redirect URLs** too (`https://your-domain/auth/callback`).
 
-#### Custom domain (crm.aiesec.dk)
+#### Custom domain (synapse.aiesec.dk)
 
-1. In Vercel → Project → **Settings → Domains**, add `crm.aiesec.dk`.
+1. In Vercel → Project → **Settings → Domains**, add `synapse.aiesec.dk`.
 2. Vercel will give you a DNS record to add (a `CNAME` pointing
    `crm` → `cname.vercel-dns.com`, typically). Add that record wherever
    `aiesec.dk`'s DNS is managed.
 3. Once it resolves, update the Supabase Site URL / Redirect URLs (step above)
-   to use `https://crm.aiesec.dk` instead of the `*.vercel.app` URL.
+   to use `https://synapse.aiesec.dk` instead of the `*.vercel.app` URL.
 
 ### 6. Connect the Typeform webhook
 
 1. In Typeform: your form → **Connect → Webhooks** → add a new webhook.
-   - URL: `https://crm.aiesec.dk/api/typeform-webhook`
+   - URL: `https://synapse.aiesec.dk/api/typeform-webhook`
    - Secret: the same value you put in `TYPEFORM_WEBHOOK_SECRET`.
 2. Open [`src/app/api/typeform-webhook/route.ts`](./src/app/api/typeform-webhook/route.ts)
    and fill in `FIELD_REF_MAP` (which Typeform question → which CRM field)

@@ -19,7 +19,7 @@ export default async function DashboardPage() {
       <header className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
-            AIESEC Denmark OGX CRM
+            Synapse
           </h1>
           <p className="text-sm text-neutral-500 dark:text-neutral-400">
             {profile.branch === 'MC Denmark' ? 'Viewing all branches' : `Viewing ${profile.branch}`}

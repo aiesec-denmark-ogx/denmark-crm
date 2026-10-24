@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AIESEC Denmark OGX CRM",
+  title: "Synapse | AIESEC Denmark OGX",
   description: "Exchange Participant tracking for AIESEC Denmark OGX",
 };
 

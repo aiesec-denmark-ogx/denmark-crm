@@ -129,7 +129,6 @@ export function EpForm({ initial, myBranch }: { initial?: Ep; myBranch: Branch }
     desired_product: initial?.desired_product ?? '',
     background: initial?.background ?? '',
     university: initial?.university ?? [],
-    university_expa: initial?.university_expa ?? '',
     languages_spoken: initial?.languages_spoken ?? [],
     languages_other: initial?.languages_other ?? '',
     citizenship: initial?.citizenship ?? '',
@@ -355,14 +354,6 @@ export function EpForm({ initial, myBranch }: { initial?: Ep; myBranch: Branch }
         values={form.university}
         onChange={(v) => set('university', v)}
       />
-      <div>
-        <label className={labelClass}>University (EXPA)</label>
-        <input
-          className={inputClass}
-          value={form.university_expa}
-          onChange={(e) => set('university_expa', e.target.value)}
-        />
-      </div>
 
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>

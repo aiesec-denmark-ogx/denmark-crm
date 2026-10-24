@@ -3,7 +3,6 @@
 import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
-import { Logo, LogoMark } from '@/components/Logo';
 
 export default function LoginPage() {
   return (
@@ -35,7 +34,7 @@ function LoginForm() {
   return (
     <main className="flex min-h-screen">
       {/* Brand panel */}
-      <div className="relative hidden w-[42%] flex-col justify-between overflow-hidden bg-brand-blue-dark px-12 py-12 text-white lg:flex">
+      <div className="relative hidden w-[42%] flex-col overflow-hidden bg-brand-blue-dark px-12 py-12 text-white lg:flex">
         <div
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
@@ -56,18 +55,17 @@ function LoginForm() {
           AIESEC Denmark
         </div>
 
-        <div className="relative">
-          <div className="flex items-center gap-3">
-            <LogoMark size={40} tone="dark" />
-            <span className="font-display bg-gradient-to-r from-sky-300 via-sky-100 to-brand-orange bg-clip-text text-5xl font-bold tracking-tight text-transparent">
+        <div className="relative flex flex-1 items-center">
+          <div>
+            <span className="font-display bg-gradient-to-r from-sky-300 via-sky-100 to-brand-orange bg-clip-text text-6xl font-bold tracking-tight text-transparent">
               Synapse
             </span>
+            <div className="mt-6 h-1 w-12 rounded-full bg-brand-orange" />
           </div>
-          <div className="mt-6 h-1 w-12 rounded-full bg-brand-orange" />
         </div>
 
         <div className="relative text-sm font-medium tracking-wide text-white/70">
-          Odense &middot; Kopenhag &middot; Aarhus
+          Aarhus &middot; Kopenhag &middot; Odense
         </div>
       </div>
 
@@ -78,8 +76,8 @@ function LoginForm() {
             <div className="text-xs font-semibold tracking-[0.2em] text-brand-blue uppercase">
               AIESEC Denmark
             </div>
-            <div className="mt-1">
-              <Logo size={30} textClassName="font-display text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100" />
+            <div className="font-display mt-1 text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+              Synapse
             </div>
           </div>
 

@@ -58,9 +58,15 @@ function LoginForm() {
 
         <div className="relative flex flex-1 items-center">
           <div>
-            <div className="flex items-center gap-4">
-              <LogoMark size={64} />
-              <span className="font-display bg-gradient-to-r from-sky-300 via-sky-100 to-brand-orange bg-clip-text text-6xl font-bold tracking-tight text-transparent">
+            <div className="relative flex items-center gap-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/brand/ekg-pulse-red.png"
+                alt=""
+                className="pointer-events-none absolute top-1/2 -left-[15%] h-10 w-[160%] -translate-y-1/2 object-cover opacity-80 mix-blend-screen"
+              />
+              <LogoMark size={64} className="relative" />
+              <span className="font-display relative bg-gradient-to-r from-sky-300 via-sky-100 to-brand-orange bg-clip-text text-6xl font-bold tracking-tight text-transparent">
                 Synapse
               </span>
             </div>

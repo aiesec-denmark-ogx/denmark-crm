@@ -95,7 +95,7 @@ export function DocumentsSection({ epId }: { epId: string }) {
           disabled={uploading}
           aria-label="Add file"
           style={{ width: 28, height: 28 }}
-          className="flex shrink-0 items-center justify-center rounded-md border border-neutral-300 text-base leading-none text-neutral-600 hover:bg-neutral-100 disabled:opacity-50 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
+          className="flex shrink-0 items-center justify-center rounded-md bg-brand-blue text-base leading-none text-white hover:brightness-110 disabled:opacity-50"
         >
           +
         </button>

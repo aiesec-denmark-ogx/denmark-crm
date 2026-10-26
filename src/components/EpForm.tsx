@@ -161,6 +161,7 @@ export function EpForm({ initial, myBranch }: { initial?: Ep; myBranch: Branch }
       const supabase = createClient();
       const payload = {
         ...form,
+        expa_ep_id: form.expa_ep_id.trim() || `PENDING-${crypto.randomUUID().slice(0, 8)}`,
         desired_product: form.desired_product || null,
         background: form.background || null,
         citizenship: form.citizenship || null,
@@ -218,10 +219,10 @@ export function EpForm({ initial, myBranch }: { initial?: Ep; myBranch: Branch }
           />
         </div>
         <div>
-          <label className={labelClass}>EXPA EP ID *</label>
+          <label className={labelClass}>EXPA EP ID</label>
           <input
-            required
             className={inputClass}
+            placeholder="Leave blank if not known yet"
             value={form.expa_ep_id}
             onChange={(e) => set('expa_ep_id', e.target.value)}
           />

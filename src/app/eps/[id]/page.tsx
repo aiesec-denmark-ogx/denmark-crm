@@ -41,13 +41,15 @@ export default async function EpDetailPage({ params }: { params: Promise<{ id: s
         <h1 className="font-display text-2xl font-bold text-neutral-900 dark:text-neutral-100">
           {ep.name}
         </h1>
-        <Link
-          href={`https://expa.aiesec.org/people/${ep.expa_ep_id}`}
-          target="_blank"
-          className="text-sm font-medium text-brand-blue underline"
-        >
-          View on EXPA ↗
-        </Link>
+        {!ep.expa_ep_id.startsWith('PENDING-') && (
+          <Link
+            href={`https://expa.aiesec.org/people/${ep.expa_ep_id}`}
+            target="_blank"
+            className="text-sm font-medium text-brand-blue underline"
+          >
+            View on EXPA ↗
+          </Link>
+        )}
       </div>
 
       <section className="mb-8 grid grid-cols-1 gap-3 rounded-lg border border-neutral-200 p-4 text-sm sm:grid-cols-3 dark:border-neutral-800">

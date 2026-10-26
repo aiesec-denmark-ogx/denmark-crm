@@ -36,7 +36,7 @@ export default async function DashboardPage() {
         <div className="flex items-center gap-4">
           <Link
             href="/eps/new"
-            className="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white dark:bg-neutral-100 dark:text-neutral-900"
+            className="rounded-md bg-brand-blue px-4 py-2 text-sm font-medium text-white hover:brightness-110"
           >
             + New EP
           </Link>

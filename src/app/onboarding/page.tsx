@@ -49,7 +49,7 @@ export default function OnboardingPage() {
         onSubmit={handleSubmit}
         className="w-full max-w-sm rounded-xl border border-neutral-200 bg-white p-8 shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
       >
-        <h1 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+        <h1 className="font-display text-xl font-bold text-neutral-900 dark:text-neutral-100">
           Which branch are you with?
         </h1>
         <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
@@ -63,7 +63,7 @@ export default function OnboardingPage() {
               key={option}
               className={`flex cursor-pointer items-center gap-3 rounded-md border px-3 py-2 text-sm ${
                 branch === option
-                  ? 'border-neutral-900 bg-neutral-50 dark:border-neutral-100 dark:bg-neutral-800'
+                  ? 'border-brand-blue bg-blue-50 dark:bg-neutral-800'
                   : 'border-neutral-200 dark:border-neutral-700'
               }`}
             >
@@ -89,7 +89,7 @@ export default function OnboardingPage() {
         <button
           type="submit"
           disabled={!branch || saving}
-          className="mt-6 w-full rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50 dark:bg-neutral-100 dark:text-neutral-900"
+          className="mt-6 w-full rounded-md bg-brand-blue px-4 py-2 text-sm font-medium text-white hover:brightness-110 disabled:opacity-50"
         >
           {saving ? 'Saving…' : 'Continue'}
         </button>

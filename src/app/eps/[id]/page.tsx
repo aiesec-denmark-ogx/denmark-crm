@@ -29,7 +29,7 @@ export default async function EpDetailPage({ params }: { params: Promise<{ id: s
     <main className="mx-auto w-full max-w-3xl px-4 py-8">
       <Link
         href="/dashboard"
-        className="-ml-24 mb-4 inline-flex items-center gap-1.5 rounded-full bg-neutral-900 px-4 py-1.5 text-sm font-medium text-white hover:bg-neutral-700 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300"
+        className="-ml-24 mb-4 inline-flex items-center gap-1.5 rounded-full bg-brand-blue px-4 py-1.5 text-sm font-medium text-white hover:brightness-110"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
           <path d="M15 18l-6-6 6-6" />
@@ -38,13 +38,13 @@ export default async function EpDetailPage({ params }: { params: Promise<{ id: s
       </Link>
 
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+        <h1 className="font-display text-2xl font-bold text-neutral-900 dark:text-neutral-100">
           {ep.name}
         </h1>
         <Link
           href={`https://expa.aiesec.org/people/${ep.expa_ep_id}`}
           target="_blank"
-          className="text-sm text-neutral-500 underline dark:text-neutral-400"
+          className="text-sm font-medium text-brand-blue underline"
         >
           View on EXPA ↗
         </Link>
@@ -54,7 +54,7 @@ export default async function EpDetailPage({ params }: { params: Promise<{ id: s
         {steps.map(([label, from, to]) => (
           <div key={label}>
             <div className="text-neutral-500 dark:text-neutral-400">{label}</div>
-            <div className="font-medium text-neutral-900 dark:text-neutral-100">
+            <div className="font-display text-base font-bold text-brand-blue">
               {from && to ? formatDuration(new Date(to).getTime() - new Date(from).getTime()) : '—'}
             </div>
           </div>

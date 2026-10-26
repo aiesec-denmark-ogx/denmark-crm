@@ -105,7 +105,7 @@ export function CommentSection({ epId, myId }: { epId: string; myId: string }) {
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">Comments</h2>
+      <h2 className="font-display text-base font-bold text-neutral-900 dark:text-neutral-100">Comments</h2>
 
       <div className="flex flex-col gap-3">
         {comments.length === 0 && (

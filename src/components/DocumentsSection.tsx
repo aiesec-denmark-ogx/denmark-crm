@@ -88,7 +88,7 @@ export function DocumentsSection({ epId }: { epId: string }) {
   return (
     <section className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">Files</h2>
+        <h2 className="font-display text-base font-bold text-neutral-900 dark:text-neutral-100">Files</h2>
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}

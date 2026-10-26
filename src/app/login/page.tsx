@@ -58,11 +58,7 @@ function LoginForm() {
 
         <div className="relative flex flex-1 items-center">
           <div>
-            <Logo
-              size={64}
-              pulse
-              textClassName="font-display relative bg-gradient-to-r from-sky-300 via-sky-100 to-brand-orange bg-clip-text text-6xl font-bold tracking-tight text-transparent"
-            />
+            <Logo height={56} />
             <div className="mt-6 h-1 w-12 rounded-full bg-brand-orange" />
           </div>
         </div>
@@ -80,11 +76,7 @@ function LoginForm() {
               AIESEC Denmark
             </div>
             <div className="mt-1">
-              <Logo
-                size={32}
-                pulse
-                textClassName="font-display text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100"
-              />
+              <Logo height={32} />
             </div>
           </div>
 

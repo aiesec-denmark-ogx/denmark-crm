@@ -84,10 +84,6 @@ function LoginForm() {
 
       {/* Sign-in panel */}
       <div className="relative flex flex-1 flex-col items-center justify-start overflow-hidden bg-white px-6 pt-20 lg:justify-center lg:pt-0 dark:bg-neutral-950">
-        <div className="absolute inset-x-0 top-28 flex items-center justify-center gap-2 text-[18px] font-semibold tracking-wide text-red-500">
-          <span aria-hidden>🧨</span>
-          Danish Dynamite
-        </div>
         <div className="w-full max-w-sm">
           <div className="mb-8 lg:hidden">
             <div className="text-xs font-semibold tracking-[0.2em] text-brand-blue uppercase">
@@ -96,6 +92,11 @@ function LoginForm() {
             <div className="mt-1">
               <Logo height={40} />
             </div>
+          </div>
+
+          <div className="mb-2 flex items-center gap-1.5 text-xs font-medium tracking-wide text-neutral-400 dark:text-neutral-500">
+            <span aria-hidden>🧨</span>
+            Danish Dynamite
           </div>
 
           <h1 className="font-display text-2xl font-bold text-neutral-900 dark:text-neutral-100">

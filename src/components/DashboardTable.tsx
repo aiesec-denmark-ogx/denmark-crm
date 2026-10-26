@@ -54,17 +54,34 @@ export function DashboardTable({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center gap-2">
-        <input
-          type="text"
-          placeholder="Search by name or EXPA ID…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="w-64 rounded-md border border-neutral-300 px-3 py-1.5 text-sm dark:border-neutral-700 dark:bg-neutral-900"
-        />
+        <div className="relative">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-neutral-400"
+            style={{ flexShrink: 0 }}
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search by name or EXPA ID…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-64 rounded-md border border-neutral-300 py-1.5 pr-3 pl-8 text-sm transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900"
+          />
+        </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value as Status | 'all')}
-          className="rounded-md border border-neutral-300 px-3 py-1.5 text-sm dark:border-neutral-700 dark:bg-neutral-900"
+          className="rounded-md border border-neutral-300 px-3 py-1.5 text-sm transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900"
         >
           <option value="all">All statuses</option>
           {ALL_STATUSES.map((status) => (

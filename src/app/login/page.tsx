@@ -66,8 +66,19 @@ function LoginForm() {
           </div>
         </div>
 
-        <div className="relative text-sm font-medium tracking-wide text-white/70">
-          Aarhus &middot; Copenhagen &middot; Odense
+        <div className="relative -mx-12 overflow-hidden border-t border-white/10 py-4">
+          <div className="animate-marquee flex w-max items-center gap-8 whitespace-nowrap text-lg font-semibold tracking-wide text-white/80">
+            {[0, 1].map((i) => (
+              <div key={i} className="flex items-center gap-8">
+                <span>Aarhus</span>
+                <span className="text-brand-orange">&bull;</span>
+                <span>Copenhagen</span>
+                <span className="text-brand-orange">&bull;</span>
+                <span>Odense</span>
+                <span className="text-brand-orange">&bull;</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

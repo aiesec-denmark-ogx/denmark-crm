@@ -13,14 +13,11 @@ export default async function EpDetailPage({ params }: { params: Promise<{ id: s
   const { user, profile } = await requireUser();
   const supabase = await createClient();
 
-  const { data: ep } = await supabase.from('eps').select('*').eq('id', id).single<Ep>();
+  const [{ data: ep }, { data: times }] = await Promise.all([
+    supabase.from('eps').select('*').eq('id', id).single<Ep>(),
+    supabase.from('ep_process_times').select('*').eq('ep_id', id).maybeSingle<EpProcessTimes>(),
+  ]);
   if (!ep) notFound();
-
-  const { data: times } = await supabase
-    .from('ep_process_times')
-    .select('*')
-    .eq('ep_id', id)
-    .maybeSingle<EpProcessTimes>();
 
   const steps: Array<[string, string | null | undefined, string | null | undefined]> = [
     ['Open → Applied', times?.open_at, times?.applied_at],

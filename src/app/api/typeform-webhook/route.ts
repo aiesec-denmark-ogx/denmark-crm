@@ -93,7 +93,7 @@ function detectEntity(cityAnswer: string | null): Branch {
   const c = cityAnswer.toLowerCase();
   if (c.includes('odense')) return 'Odense';
   if (c.includes('københavn') || c.includes('kobenhavn') || c.includes('copenhagen') || c.includes('kbh')) {
-    return 'Kopenhag';
+    return 'Copenhagen';
   }
   if (c.includes('aarhus') || c.includes('århus') || c.includes('arhus')) return 'Aarhus';
   return DEFAULT_ENTITY;

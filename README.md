@@ -114,10 +114,10 @@ npm run dev
 ## How access control works
 
 - Every user signs in with their `@aiesec.dk` Google account.
-- On first login they're asked to pick their branch (Odense / Kopenhag /
+- On first login they're asked to pick their branch (Odense / Copenhagen /
   Aarhus / MC Denmark) — this is permanent; an MC Denmark admin would need to
   fix it directly in the `profiles` table if someone picks wrong.
-- Odense/Kopenhag/Aarhus accounts only ever see EPs belonging to their own
+- Odense/Copenhagen/Aarhus accounts only ever see EPs belonging to their own
   branch. MC Denmark accounts see everything. This is enforced by Postgres
   Row Level Security (`supabase/migrations/0001_init.sql`), not just by the
   app's UI — so it holds even if someone calls the database directly.

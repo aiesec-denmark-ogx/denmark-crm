@@ -1,7 +1,7 @@
 // Mirrors the Postgres enums in supabase/migrations/0001_init.sql.
 // Keep these in sync if the schema changes.
 
-export const BRANCHES = ['Odense', 'Kopenhag', 'Aarhus', 'MC Denmark'] as const;
+export const BRANCHES = ['Odense', 'Copenhagen', 'Aarhus', 'MC Denmark'] as const;
 export type Branch = (typeof BRANCHES)[number];
 
 /** Branches a user can pick as "their" branch at onboarding (MC Denmark sees everything). */

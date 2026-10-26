@@ -89,7 +89,13 @@ function LoginForm() {
       </div>
 
       {/* Sign-in panel */}
-      <div className="flex flex-1 flex-col items-center justify-start bg-white px-6 pt-20 lg:justify-center lg:pt-0 dark:bg-neutral-950">
+      <div className="relative flex flex-1 flex-col items-center justify-start overflow-hidden bg-white px-6 pt-20 lg:justify-center lg:pt-0 dark:bg-neutral-950">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/icon.png"
+          alt=""
+          className="pointer-events-none absolute -top-24 -right-24 h-[480px] w-[480px] opacity-[0.05] dark:opacity-[0.08]"
+        />
         <div className="w-full max-w-sm">
           <div className="mb-8 lg:hidden">
             <div className="text-xs font-semibold tracking-[0.2em] text-brand-blue uppercase">

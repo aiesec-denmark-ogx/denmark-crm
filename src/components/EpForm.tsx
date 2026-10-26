@@ -60,7 +60,7 @@ function DynamicList({
         <button
           type="button"
           onClick={() => onChange([...values, ''])}
-          className="text-sm text-neutral-600 underline dark:text-neutral-400"
+          className="text-sm font-medium text-brand-blue hover:underline"
         >
           + Add
         </button>
@@ -98,6 +98,7 @@ function CheckboxGroup<T extends string>({
                     : values.filter((v) => v !== option)
                 )
               }
+              className="accent-brand-blue"
             />
             {option}
           </label>
@@ -108,7 +109,7 @@ function CheckboxGroup<T extends string>({
 }
 
 const inputClass =
-  'mt-1 w-full rounded-md border border-neutral-300 px-3 py-1.5 text-sm dark:border-neutral-700 dark:bg-neutral-900';
+  'mt-1 w-full rounded-md border border-neutral-300 px-3 py-1.5 text-sm transition focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 focus:outline-none dark:border-neutral-700 dark:bg-neutral-900';
 const labelClass = 'block text-sm font-medium text-neutral-700 dark:text-neutral-300';
 
 export function EpForm({ initial, myBranch }: { initial?: Ep; myBranch: Branch }) {
@@ -470,6 +471,7 @@ export function EpForm({ initial, myBranch }: { initial?: Ep; myBranch: Branch }
               type="checkbox"
               checked={form.gdpr_accepted}
               onChange={(e) => set('gdpr_accepted', e.target.checked)}
+              className="accent-brand-blue"
             />
             GDPR consent given (EU 2016/679)
           </label>

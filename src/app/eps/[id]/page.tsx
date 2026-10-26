@@ -1,22 +1,22 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { requireUser } from '@/lib/auth';
-import { createClient } from '@/lib/supabase/server';
+import { requireAuthedUser, requireProfile } from '@/lib/auth';
 import { EpForm } from '@/components/EpForm';
 import { DocumentsSection } from '@/components/DocumentsSection';
 import { CommentSection } from '@/components/CommentSection';
 import { formatDuration } from '@/lib/status';
-import type { Ep, EpProcessTimes } from '@/lib/types';
+import type { Ep, EpProcessTimes, Profile } from '@/lib/types';
 
 export default async function EpDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const { user, profile } = await requireUser();
-  const supabase = await createClient();
+  const { supabase, user } = await requireAuthedUser();
 
-  const [{ data: ep }, { data: times }] = await Promise.all([
+  const [{ data: profileRow }, { data: ep }, { data: times }] = await Promise.all([
+    supabase.from('profiles').select('*').eq('id', user.id).maybeSingle<Profile>(),
     supabase.from('eps').select('*').eq('id', id).single<Ep>(),
     supabase.from('ep_process_times').select('*').eq('ep_id', id).maybeSingle<EpProcessTimes>(),
   ]);
+  const profile = requireProfile(profileRow ?? null);
   if (!ep) notFound();
 
   const steps: Array<[string, string | null | undefined, string | null | undefined]> = [

@@ -1,22 +1,23 @@
 import Link from 'next/link';
-import { requireUser } from '@/lib/auth';
-import { createClient } from '@/lib/supabase/server';
+import { requireAuthedUser, requireProfile } from '@/lib/auth';
 import { SignOutButton } from '@/components/SignOutButton';
 import { DashboardTable } from '@/components/DashboardTable';
 import { NotificationBell } from '@/components/NotificationBell';
 import { Logo } from '@/components/Logo';
-import type { Ep } from '@/lib/types';
+import type { Ep, Profile } from '@/lib/types';
 
 export default async function DashboardPage() {
-  const { user, profile } = await requireUser();
-  const supabase = await createClient();
+  const { supabase, user } = await requireAuthedUser();
 
-  const { data: eps } = await supabase
-    .from('eps')
-    .select('*')
-    .order('next_followup_date', { ascending: true, nullsFirst: false });
-
-  const { data: commentRows } = await supabase.from('comments').select('ep_id');
+  const [{ data: profileRow }, { data: eps }, { data: commentRows }] = await Promise.all([
+    supabase.from('profiles').select('*').eq('id', user.id).maybeSingle<Profile>(),
+    supabase
+      .from('eps')
+      .select('*')
+      .order('next_followup_date', { ascending: true, nullsFirst: false }),
+    supabase.from('comments').select('ep_id'),
+  ]);
+  const profile = requireProfile(profileRow ?? null);
   const commentCounts: Record<string, number> = {};
   for (const row of commentRows ?? []) {
     commentCounts[row.ep_id] = (commentCounts[row.ep_id] ?? 0) + 1;

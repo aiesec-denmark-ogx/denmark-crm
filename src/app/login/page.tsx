@@ -55,8 +55,14 @@ function LoginForm() {
           style={{ background: 'var(--brand-orange)' }}
         />
 
-        <div className="font-sans relative text-[20px] font-bold tracking-[0.2em] text-white uppercase">
-          AIESEC in Denmark
+        <div className="relative flex flex-col items-start gap-2">
+          <div className="font-sans text-[20px] font-bold tracking-[0.2em] text-white uppercase">
+            AIESEC in Denmark
+          </div>
+          <div className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide text-white/80">
+            <span aria-hidden>🧨</span>
+            Danish Dynamite
+          </div>
         </div>
 
         <div className="relative flex flex-1 items-center">

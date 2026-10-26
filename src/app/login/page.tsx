@@ -35,7 +35,10 @@ function LoginForm() {
   return (
     <main className="flex min-h-screen">
       {/* Brand panel */}
-      <div className="relative hidden w-[42%] flex-col overflow-hidden bg-brand-blue-dark px-12 py-12 text-white lg:flex">
+      <div
+        className="relative hidden w-[42%] flex-col overflow-hidden px-12 py-12 text-white lg:flex"
+        style={{ background: '#0d0f16' }}
+      >
         <div
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
@@ -53,18 +56,18 @@ function LoginForm() {
         />
 
         <div className="font-sans relative text-sm font-bold tracking-[0.2em] text-white uppercase">
-          AIESEC Denmark
+          AIESEC in Denmark
         </div>
 
         <div className="relative flex flex-1 items-center">
           <div>
-            <Logo height={56} />
+            <Logo height={96} />
             <div className="mt-6 h-1 w-12 rounded-full bg-brand-orange" />
           </div>
         </div>
 
         <div className="relative text-sm font-medium tracking-wide text-white/70">
-          Aarhus &middot; Kopenhag &middot; Odense
+          Aarhus &middot; Copenhagen &middot; Odense
         </div>
       </div>
 
@@ -73,10 +76,10 @@ function LoginForm() {
         <div className="w-full max-w-sm">
           <div className="mb-8 lg:hidden">
             <div className="text-xs font-semibold tracking-[0.2em] text-brand-blue uppercase">
-              AIESEC Denmark
+              AIESEC in Denmark
             </div>
             <div className="mt-1">
-              <Logo height={32} />
+              <Logo height={40} />
             </div>
           </div>
 
@@ -126,7 +129,7 @@ function LoginForm() {
           </button>
 
           <p className="mt-6 text-center text-xs text-neutral-400 dark:text-neutral-600">
-            Access is restricted to AIESEC Denmark members.
+            Access is restricted to AIESEC in Denmark members.
           </p>
         </div>
       </div>

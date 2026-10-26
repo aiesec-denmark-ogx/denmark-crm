@@ -84,7 +84,7 @@ function LoginForm() {
 
       {/* Sign-in panel */}
       <div className="relative flex flex-1 flex-col items-center justify-start overflow-hidden bg-white px-6 pt-20 lg:justify-center lg:pt-0 dark:bg-neutral-950">
-        <div className="absolute top-6 right-6 flex items-center gap-1.5 rounded-full bg-neutral-100 px-3 py-1 text-xs font-semibold tracking-wide text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+        <div className="absolute inset-x-0 top-16 flex items-center justify-center gap-2 text-sm font-medium tracking-wide text-neutral-400 dark:text-neutral-600">
           <span aria-hidden>🧨</span>
           Danish Dynamite
         </div>

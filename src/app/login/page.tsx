@@ -55,14 +55,8 @@ function LoginForm() {
           style={{ background: 'var(--brand-orange)' }}
         />
 
-        <div className="relative flex flex-col items-start gap-2">
-          <div className="font-sans text-[20px] font-bold tracking-[0.2em] text-white uppercase">
-            AIESEC in Denmark
-          </div>
-          <div className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide text-white/80">
-            <span aria-hidden>🧨</span>
-            Danish Dynamite
-          </div>
+        <div className="font-sans relative text-[20px] font-bold tracking-[0.2em] text-white uppercase">
+          AIESEC in Denmark
         </div>
 
         <div className="relative flex flex-1 items-center">
@@ -90,12 +84,10 @@ function LoginForm() {
 
       {/* Sign-in panel */}
       <div className="relative flex flex-1 flex-col items-center justify-start overflow-hidden bg-white px-6 pt-20 lg:justify-center lg:pt-0 dark:bg-neutral-950">
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -top-20 -right-16 text-[420px] leading-none opacity-[0.07] dark:opacity-[0.1]"
-        >
-          🧨
-        </span>
+        <div className="absolute top-6 right-6 flex items-center gap-1.5 rounded-full bg-neutral-100 px-3 py-1 text-xs font-semibold tracking-wide text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+          <span aria-hidden>🧨</span>
+          Danish Dynamite
+        </div>
         <div className="w-full max-w-sm">
           <div className="mb-8 lg:hidden">
             <div className="text-xs font-semibold tracking-[0.2em] text-brand-blue uppercase">

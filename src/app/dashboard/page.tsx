@@ -16,6 +16,12 @@ export default async function DashboardPage() {
     .select('*')
     .order('next_followup_date', { ascending: true, nullsFirst: false });
 
+  const { data: commentRows } = await supabase.from('comments').select('ep_id');
+  const commentCounts: Record<string, number> = {};
+  for (const row of commentRows ?? []) {
+    commentCounts[row.ep_id] = (commentCounts[row.ep_id] ?? 0) + 1;
+  }
+
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 px-4 py-8">
       <header className="flex items-center justify-between">
@@ -39,7 +45,7 @@ export default async function DashboardPage() {
         </div>
       </header>
 
-      <DashboardTable eps={(eps as Ep[]) ?? []} />
+      <DashboardTable eps={(eps as Ep[]) ?? []} commentCounts={commentCounts} />
     </main>
   );
 }

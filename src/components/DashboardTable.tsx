@@ -2,12 +2,38 @@
 
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import type { Ep } from '@/lib/types';
 import { ALL_STATUSES, type Status } from '@/lib/status';
 import { StatusBadge } from '@/components/StatusBadge';
 
-export function DashboardTable({ eps }: { eps: Ep[] }) {
+function formatDateTime(iso: string | null): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  const date = d.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+  const time = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  return `${date} - ${time}`;
+}
+
+function formatDate(iso: string | null): string | null {
+  if (!iso) return null;
+  return new Date(iso).toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+}
+
+export function DashboardTable({
+  eps,
+  commentCounts,
+}: {
+  eps: Ep[];
+  commentCounts: Record<string, number>;
+}) {
   const router = useRouter();
   const [statusFilter, setStatusFilter] = useState<Status | 'all'>('all');
   const [query, setQuery] = useState('');
@@ -52,62 +78,62 @@ export function DashboardTable({ eps }: { eps: Ep[] }) {
         </span>
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
-        <table className="w-full min-w-[720px] text-sm">
-          <thead className="bg-neutral-50 text-left text-xs uppercase tracking-wide text-neutral-500 dark:bg-neutral-900 dark:text-neutral-400">
-            <tr>
-              <th className="px-4 py-3">Name</th>
-              <th className="px-4 py-3">Entity</th>
-              <th className="px-4 py-3">Product</th>
-              <th className="px-4 py-3">Status</th>
-              <th className="px-4 py-3">Next follow-up</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
-            {filtered.map((ep) => (
-              <tr
+      {filtered.length === 0 ? (
+        <div className="rounded-lg border border-neutral-200 px-4 py-8 text-center text-neutral-400 dark:border-neutral-800">
+          No EPs match your filters.
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {filtered.map((ep) => {
+            const followUp = formatDateTime(ep.next_followup_date);
+            const updated = formatDate(ep.updated_at);
+            const count = commentCounts[ep.id] ?? 0;
+
+            return (
+              <button
                 key={ep.id}
+                type="button"
                 onClick={() => router.push(`/eps/${ep.id}`)}
-                className="cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900"
+                className="flex flex-col gap-3 rounded-lg border border-neutral-200 bg-white p-4 text-left transition hover:border-neutral-300 hover:shadow-sm dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700"
               >
-                <td className="px-4 py-3">
-                  <Link
-                    href={`/eps/${ep.id}`}
-                    onClick={(e) => e.stopPropagation()}
-                    className="font-medium hover:underline"
-                  >
+                <div>
+                  <div className="font-medium text-neutral-900 dark:text-neutral-100">
                     {ep.name}
-                  </Link>
-                  <div className="text-xs text-neutral-500 dark:text-neutral-400">
-                    {ep.expa_ep_id}
                   </div>
-                </td>
-                <td className="px-4 py-3">{ep.entity}</td>
-                <td className="px-4 py-3">{ep.desired_product ?? '—'}</td>
-                <td className="px-4 py-3">
+                  <div className="truncate text-xs text-neutral-500 dark:text-neutral-400">
+                    {ep.entity}
+                    {ep.desired_product ? ` · ${ep.desired_product}` : ''}
+                  </div>
+                </div>
+
+                <div>
                   <StatusBadge status={ep.status} />
-                </td>
-                <td className="px-4 py-3">
-                  {ep.next_followup_date
-                    ? new Date(ep.next_followup_date).toLocaleDateString('en-GB', {
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric',
-                      })
-                    : '—'}
-                </td>
-              </tr>
-            ))}
-            {filtered.length === 0 && (
-              <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-neutral-400">
-                  No EPs match your filters.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+                </div>
+
+                <div className="text-sm">
+                  {followUp ? (
+                    <span className="font-medium text-neutral-900 dark:text-neutral-100">
+                      {followUp}
+                    </span>
+                  ) : (
+                    <span className="text-neutral-400">No follow-up set</span>
+                  )}
+                </div>
+
+                <div className="mt-auto flex items-center justify-between border-t border-neutral-100 pt-2.5 text-xs text-neutral-400 dark:border-neutral-800">
+                  <span>{updated ? `Updated ${updated}` : ''}</span>
+                  <span className="flex items-center gap-1">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                    </svg>
+                    {count}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

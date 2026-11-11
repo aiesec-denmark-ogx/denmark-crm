@@ -4,7 +4,7 @@
 export type StatusGroup = 'pipeline' | 'secondary' | 'dropped';
 
 export const STATUS_PIPELINE = [
-  'Open', 'Applied', 'Accepted', 'Paid', 'Approved', 'Realised', 'Finished', 'Completed',
+  'Open', 'Contacted', 'Applied', 'Accepted', 'Paid', 'Approved', 'Realised', 'Finished', 'Completed',
 ] as const;
 
 export const STATUS_SECONDARY = ['Consecutive Approval', 'Re-integrated'] as const;

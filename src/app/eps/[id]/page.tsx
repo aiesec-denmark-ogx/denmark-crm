@@ -4,6 +4,7 @@ import { requireAuthedUser, requireProfile } from '@/lib/auth';
 import { EpForm } from '@/components/EpForm';
 import { DocumentsSection } from '@/components/DocumentsSection';
 import { CommentSection } from '@/components/CommentSection';
+import { EpManagerSection } from '@/components/EpManagerSection';
 import { formatDuration } from '@/lib/status';
 import type { Ep, EpProcessTimes, Profile } from '@/lib/types';
 
@@ -18,6 +19,10 @@ export default async function EpDetailPage({ params }: { params: Promise<{ id: s
   ]);
   const profile = requireProfile(profileRow ?? null);
   if (!ep) notFound();
+
+  const { data: manager } = ep.manager_id
+    ? await supabase.from('profiles').select('*').eq('id', ep.manager_id).maybeSingle<Profile>()
+    : { data: null };
 
   const steps: Array<[string, string | null | undefined, string | null | undefined]> = [
     ['Open → Applied', times?.open_at, times?.applied_at],
@@ -62,6 +67,10 @@ export default async function EpDetailPage({ params }: { params: Promise<{ id: s
           </div>
         ))}
       </section>
+
+      <div className="mb-8">
+        <EpManagerSection epId={ep.id} initialManager={manager ?? null} />
+      </div>
 
       <EpForm initial={ep} myBranch={profile.branch} />
 

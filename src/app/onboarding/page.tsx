@@ -30,6 +30,7 @@ export default function OnboardingPage() {
     const { error: insertError } = await supabase.from('profiles').insert({
       id: user.id,
       email: user.email,
+      name: user.user_metadata.full_name ?? user.user_metadata.name ?? null,
       branch,
     });
 

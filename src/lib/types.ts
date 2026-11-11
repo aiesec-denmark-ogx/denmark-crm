@@ -39,6 +39,7 @@ export type Ep = {
 
   date_registered: string;
   created_by: string | null;
+  manager_id: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -54,6 +55,7 @@ export type EpProcessTimes = {
 export type Profile = {
   id: string;
   email: string;
+  name: string | null;
   branch: Branch;
   created_at: string;
 };

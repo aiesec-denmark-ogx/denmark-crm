@@ -30,9 +30,11 @@ function formatDate(iso: string | null): string | null {
 export function DashboardTable({
   eps,
   commentCounts,
+  managerNames,
 }: {
   eps: Ep[];
   commentCounts: Record<string, number>;
+  managerNames: Record<string, string>;
 }) {
   const router = useRouter();
   const [statusFilter, setStatusFilter] = useState<Status | 'all'>('all');
@@ -105,6 +107,7 @@ export function DashboardTable({
             const followUp = formatDateTime(ep.next_followup_date);
             const updated = formatDate(ep.updated_at);
             const count = commentCounts[ep.id] ?? 0;
+            const managerName = ep.manager_id ? managerNames[ep.manager_id] : null;
 
             return (
               <button
@@ -123,8 +126,17 @@ export function DashboardTable({
                   </div>
                 </div>
 
-                <div>
+                <div className="flex items-center justify-between gap-2">
                   <StatusBadge status={ep.status} />
+                  {managerName && (
+                    <span className="flex min-w-0 items-center gap-1 text-xs text-neutral-500 dark:text-neutral-400">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                      <span className="truncate">{managerName}</span>
+                    </span>
+                  )}
                 </div>
 
                 <div className="text-sm">

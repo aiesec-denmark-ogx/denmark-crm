@@ -9,18 +9,23 @@ import type { Ep, Profile } from '@/lib/types';
 export default async function DashboardPage() {
   const { supabase, user } = await requireAuthedUser();
 
-  const [{ data: profileRow }, { data: eps }, { data: commentRows }] = await Promise.all([
+  const [{ data: profileRow }, { data: eps }, { data: commentRows }, { data: profiles }] = await Promise.all([
     supabase.from('profiles').select('*').eq('id', user.id).maybeSingle<Profile>(),
     supabase
       .from('eps')
       .select('*')
       .order('next_followup_date', { ascending: true, nullsFirst: false }),
     supabase.from('comments').select('ep_id'),
+    supabase.from('profiles').select('id,name,email'),
   ]);
   const profile = requireProfile(profileRow ?? null);
   const commentCounts: Record<string, number> = {};
   for (const row of commentRows ?? []) {
     commentCounts[row.ep_id] = (commentCounts[row.ep_id] ?? 0) + 1;
+  }
+  const managerNames: Record<string, string> = {};
+  for (const p of profiles ?? []) {
+    managerNames[p.id] = p.name ?? p.email;
   }
 
   return (
@@ -46,7 +51,7 @@ export default async function DashboardPage() {
         </div>
       </header>
 
-      <DashboardTable eps={(eps as Ep[]) ?? []} commentCounts={commentCounts} />
+      <DashboardTable eps={(eps as Ep[]) ?? []} commentCounts={commentCounts} managerNames={managerNames} />
     </main>
   );
 }

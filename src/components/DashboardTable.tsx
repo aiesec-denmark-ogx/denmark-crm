@@ -27,6 +27,27 @@ function formatDate(iso: string | null): string | null {
   });
 }
 
+const AVATAR_COLORS = [
+  'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300',
+  'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300',
+  'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300',
+  'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300',
+  'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300',
+  'bg-cyan-100 text-cyan-700 dark:bg-cyan-950 dark:text-cyan-300',
+];
+
+function avatarColor(name: string): string {
+  let sum = 0;
+  for (let i = 0; i < name.length; i++) sum += name.charCodeAt(i);
+  return AVATAR_COLORS[sum % AVATAR_COLORS.length];
+}
+
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
 export function DashboardTable({
   eps,
   commentCounts,
@@ -129,12 +150,15 @@ export function DashboardTable({
                 <div className="flex items-center justify-between gap-2">
                   <StatusBadge status={ep.status} />
                   {managerName && (
-                    <span className="flex min-w-0 items-center gap-1 text-xs text-neutral-500 dark:text-neutral-400">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                      </svg>
-                      <span className="truncate">{managerName}</span>
+                    <span className="flex min-w-0 items-center gap-1.5">
+                      <span
+                        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold ${avatarColor(managerName)}`}
+                      >
+                        {initials(managerName)}
+                      </span>
+                      <span className="truncate text-xs text-neutral-500 dark:text-neutral-400">
+                        {managerName}
+                      </span>
                     </span>
                   )}
                 </div>
